@@ -1,0 +1,78 @@
+<html>
+  <meta charset="UTF-8"> 
+  <script type="text/javascript" src="logic.js"></script>
+  <script type="text/javascript" src="imagemap-resize.js"></script>
+
+  <body style="font-family:arial;">
+
+    <script>
+
+      preloadImages();
+
+      var puzzles = [], comprehensions = [];
+      for (i = 0; i < 32; i ++) { puzzles[i] = i; comprehensions[i] = ''; }
+
+      loadHalfOfComprehensions(inverted = false);
+      loadHalfOfComprehensions(inverted = true);
+
+      // 'comprehensions' are the randomly generated expressions
+
+    </script>
+
+    <table>
+      <tr>
+        <td width=400px valign=top style="border:silver 1px solid;padding:10px;background-color:lightblue" id=guide>
+          <p><strong>Welcome to return of the beard/shades tester.</strong></p>
+          <p>In this remake, you are presented with a logical expression, and must deduce its result.</p>
+          <p>As before, the first term will sometimes be "if", or sometimes
+             "unless" -- i.e. the opposite of "if"<p>
+          <p>Click on each face in the image to toggle it
+          from <font color=darkgreen>green</font>
+          to <font color=red>red</font> and back.</p>
+          <p>In this way you need to construct the configuration of
+          faces that you think the expression results in.</p>
+          <p>For example, if the expression is "if !(beard and
+            shades)" you should make green all the faces except
+            the one which has both beard and shades, which should be
+            in red.</p>
+          <p>If you can get 20 correct and 0 wrong, you have probably
+            grasped the concept, well done.</p>
+          <input type=button name=jim value="Got it" onclick="document.getElementById('guide').style.display='none'">
+        </td>
+        <td valign=top>
+          <table><tr><td colspan=2>
+                <img name=faces width=420px height=560px usemap="#facesmap">
+                <map name=facesmap id=facesmap>
+                  <area shape=rect coords="  0,   0, 209, 279" href="javascript:toggleface(3)" title="Click to toggle between red and green">
+                  <area shape=rect coords="210,   0, 419, 279" href="javascript:toggleface(2)" title="Click to toggle between red and green">
+                  <area shape=rect coords="  0, 280, 209, 559" href="javascript:toggleface(1)" title="Click to toggle between red and green">
+                  <area shape=rect coords="210, 280, 419, 559" href="javascript:toggleface(0)" title="Click to toggle between red and green">
+                </map>
+                <tr>
+                  <td style='background-color:#ffffaa' align=center>
+                    <span id=expression style="font-weight:bold"></span> 
+                  </td>
+                  <td width=20px align=center>
+                    <input type=button value=OK onclick=comprehensionAttempt()>
+                  </td>
+                </tr>
+          </table>
+        </td>
+        <td align=left>
+          <p>Correct: <span id=correct></span></p>
+          <p>Wrong: <span id=wrong></span></p>
+          <p>&nbsp;</p>
+          <p><a href='logic-formulation.html'>Go to original beard/shades tester</a></p>
+          <p id=tiplink><a href=javascript:switchVisibility('tips','tiplink')>Tips</a></p>
+          <table id=tips style='align:center;font-weight:bold;border:solid silver 1px;padding:2px;color:lightblue;display:none'>
+            <tr><td align=right style='color:silver;height:5px;font-size:8pt'><span style=cursor:pointer onclick=switchVisibility('tiplink','tips')>X</span></td></tr>
+            <tr><td style='padding:2px 12px'><p>!(beard and shades) = !beard or !shades</p></td></tr>
+            <tr><td style='padding:2px 12px'><p>!(beard or shades) = !beard and !shades</p></td></tr>
+            <tr><td align=right style='height:5px;font-size:8pt'>&nbsp;</td></tr>
+          </table>
+
+      </tr>
+    </table>
+    <script> comprehension_reload(); </script>
+  </body>
+</html>

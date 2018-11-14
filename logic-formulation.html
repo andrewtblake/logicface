@@ -1,0 +1,77 @@
+<html>
+  <meta charset="UTF-8"> 
+  <script type="text/javascript" src="logic.js"></script>
+
+  <body style="font-family:arial;">
+
+    <script>
+
+      preloadImages();
+
+      var puzzles = [];
+      // the full number of possible different puzzle configurations, from
+      // which we pull configurations one by one in random order. 
+      // The value of the expression being sought will be integer half of 
+      // the value stored at each position, while the puzzle type will be 
+      // the modulo-2
+
+      for (i = 0; i < 32; i ++) { puzzles[i] = i; }
+
+      // whether  puzzle type will be "if" or "unless"
+      var puzzletype;
+
+    </script>
+
+    <table id=wrong-try-display style='display:none;position:fixed;margin-top:5%;border:solid silver 1px;padding:5px;z-index=100;background-color:white;top:0;left:30%'>
+    <tr><td>
+      <p>Sorry, your answer is not correct.</p>
+      <p>Here is what it would result in:</p>
+    <tr><td align=center>
+      <img name=wrongtry style='width:150px;height:200px;'>
+    <tr><td align=center>
+      <input type=button value=OK onclick=$('wrong-try-display').style.display='none'>
+    </table>
+
+    <table>
+      <tr>
+        <td width=400px valign=top style="border:silver 1px solid;padding:10px;background-color:lightblue" id=guide>
+          <p><strong>Welcome to the beard/shades tester.</strong></p>
+          <p>Limber up your logic muscle by filling in the logical
+            expression below the picture so as to specify only the green
+            elements.</p>
+          <p>Watch the first term: sometimes it is "if", but sometimes
+            it is "unless" -- i.e. the opposite of "if"<p>
+          <p>You may use the operators "not", "and", and "or" (or "!", "&&" and "||") in any
+            combination, with parentheses if desired.</p>
+          <p>You may use "b", "beard" or "barba" to indicate the
+            presence of beard, and "s", "l", "shades" or "lentes" to
+            indicate presence of shades.</p>  
+          <p>An example would be "if [not (beard and shades)]" which
+            would select all the faces except the one which had both
+            beard and shades.</p>
+          <p>If you can get 20 correct and 0 wrong, you have probably
+            grasped the concept, well done.</p>
+          <input type=button name=jim value="Got it" onclick="document.getElementById('guide').style.display='none'">
+        </td>
+        <td valign=top>
+          <table><tr><td colspan=2>
+                <img name=faces width=420px>
+                <tr>
+                  <td width=50pt align=center>
+                    <span id=if_unless_space style="font-weight:bold"></span>
+                  <td>
+                    <input type=text id=assertion size=40 onkeydown="if (event.keyCode == 13) formulationAttempt()">
+                    <input type=button name=eval value=OK onclick=formulationAttempt()>
+                    <span id=canreload></span>
+          </table>
+        </td>
+        <td align=left>
+          <p>Correct: <span id=correct></span></p>
+          <p>Wrong: <span id=wrong></span></p>
+          <p>&nbsp;</p>
+          <p><a href='logic-comprehension.html'>Try the new inverse beard/shades tester</a></p>
+      </tr>
+    </table>
+    <script>formulation_reload();</script>
+  </body>
+</html>
